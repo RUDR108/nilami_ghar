@@ -8,8 +8,8 @@ from django.db.models import Q
 
 # Create your views here.
 
-def store(request,category_slug=None):
-    categories=None
+def store(request,category_slug=None):    #store 
+    categories=None 
     products=None
     paged_products=None
 
@@ -34,7 +34,7 @@ def store(request,category_slug=None):
     return render(request,'store/store.html',context)
 
 
-def product_detail(request,product_slug):
+def product_detail(request,product_slug):  #detail for each product 
     try:
         single_product = Product.objects.get(slug=product_slug)
        
@@ -56,9 +56,10 @@ def product_detail(request,product_slug):
 
 def search(request):
     context={}
-    if 'Keyword' in request.GET:
+
+    if 'keyword' in request.GET:
         print("something")
-        keyword=request.GET.get('Keyword')
+        keyword=request.GET['keyword']
         if keyword:
             products=Product.objects.order_by('-created_date').filter(Q(description__icontains=keyword)|Q(product_name__icontains=keyword))
             product_count = products.count()
