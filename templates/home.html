@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- {% load static %} -->
+<section class="section-introduction" style="padding:30px;">
+	<div class="container">
+	
+	<div class="intro-banner-wrap">
+		<img src="{% static 'images/banners/1.jpg' %}" class="img-fluid rounded">
+	</div>
+	
+	</div> <!-- container //  -->
+	</section>
+	<!-- ========================= SECTION MAIN END// ========================= -->
+	
+	<!-- ========================= SECTION  ========================= -->
+	<section class="section-name ">
+	<div class="container">
+<!-- 	
+	<header class="section-heading">
+		<a href="{% url 'store' %}" class="btn btn-outline-primary float-right">See all</a>-->
+		 {% if product_count %}
+		<h3 class="section-title">{{product_count}} similar product in store</h3>  
+		<!-- {% else %} -->
+		{% endif %} 
+		<!-- {% if not product_count %}  -->
+		<h3 class="section-title">products in Auction</h3>
+		<!-- {% endif %} -->
+	<!-- </header>//sect-heading -->
+
+<body>	
+	<div class="row">
+		
+		{% if products %}
+		{% for product in products %}
+		<div class="row" style="padding:20px;">
+			<!-- <div class="col-md-3"> -->
+				<div class="card card-product-grid" style="width:275px;">
+					<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+					<hr>
+					<figcaption class="info-wrap" styl="text-align:center;" >
+						<a href="{{ product.get_url }}" class="title"><h4>{{product.product_name}}</h4></a>
+					</figcaption>
+					</div>
+					<div class="row">
+					<!-- <div style="padding-left: 20px;padding-right: 20px;"> -->
+					<div class="card card-product-grid" >
+						<div style="text-align:center;width:370px;">
+					<span>Description:</span>
+					<hr>
+					<p>{{product.description}}</p>
+					</div>
+					<!-- </div> -->
+					</div>
+					
+					<div class="card card-product-grid" style="padding-left: 20px;padding-right: 20px;">
+					<div class="price mt-1" style="padding:20px;">Current bid: <span style="color:red;">{{product.price}}</span> Rupees<span>/{{product.current_winner}}</span></div> <!-- price-wrap.// -->
+					<hr>
+					<div class="price mt-1" style="padding:20px;">Add bid:<a href="{{ product.get_url }}"><button type="submit" style="background-color:rgb(0, 110, 255);border-radius: 5px;">Add bid</button></a></div> <!-- price-wrap.// -->
+					
+					<hr>
+					<div class="price mt-1" style="padding:20px;">Bid started:{{product.created_date}}</div> 
+					<hr>
+					<div class="price mt-1" style="padding:20px;">Bid ends on: {{product.modified_date}}</div> <!-- price-wrap.// -->				
+				</div>
+				</div>
+			<!-- </div> col.// -->
+			
+		</div> <!-- row.// -->
+	{% endfor %}
+	{% else %}
+		<h2>No Result Found</h2>
+	{% endif %}    
+	
+
+
+</div>
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+
+
+
+</body>
+</html>
+{% endblock %}
