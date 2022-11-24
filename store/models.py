@@ -10,7 +10,7 @@ def default_start_time():
     return start 
 
 # Create your models here.
-class MyProductManager(BaseUserManager):
+class MyProductManager(BaseUserManager):  #productManager for product
     def create_product(self,product_name,description,price,images):
 
         product = self.model(
@@ -36,7 +36,7 @@ class MyProductManager(BaseUserManager):
     #     product.save(using=self._db)
     #     return product
 
-class Product(models.Model):
+class Product(models.Model):                #model of product
     product_name = models.CharField(max_length=200,unique=True)
     slug =models.SlugField(max_length=200)
     description=models.TextField(blank=True)
